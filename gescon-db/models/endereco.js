@@ -73,6 +73,6 @@ module.exports = sequelize => {
     comment: "",
     indexes: []
   };
-  const EnderecoModel = sequelize.define("enderecoModel", attributes, options);
+  const EnderecoModel = sequelize.define("endereco", attributes, options);
   return EnderecoModel;
 };

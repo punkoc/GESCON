@@ -1,18 +1,18 @@
 const model = require("../models");
 
-const ServicoModel = model.servicoModel;
+const Servico = model.servicoModel;
 
 const create = (request, response) => {
-    ServicoModel.create(request.body)
+    Servico.create(request.body)
         .then((object) => {
-            response.send(object.DataValues);
+            response.send(object.dataValues);
         })
         .catch((error) => response.send(error));
 };
 
 //Lista todos os eventos acadêmicos
 const getAll = (request, response) => {
-    ServicoModel.findAll({
+    Servico.findAll({
         attributes: [
             "idservico",
             "descricao",
@@ -29,7 +29,7 @@ const getAll = (request, response) => {
 
 //Seleciona um evento acadêmico por ID
 const getById = (request, response) => {
-    ServicoModel.findByPk(request.params.id)
+    Servico.findByPk(request.params.id)
         .then((object) => {
             response.status(200).send(object.dataValues);
         })
@@ -44,7 +44,7 @@ const alterById = (request, response) => {
     const paData = {
         descricao: request.body.descricao,
     };
-    ServicoModel.update(paData, {
+    Servico.update(paData, {
         raw: true,
         where: { idservico: request.params.id },
     })
@@ -60,7 +60,7 @@ const alterById = (request, response) => {
 };
 
 const deleteById = (request, response) => {
-    ServicoModel.destroy({
+    Servico.destroy({
         where: { idservico: request.params.id },
     })
         .then((object) => {

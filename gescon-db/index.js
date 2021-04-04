@@ -5,4 +5,6 @@ const app = express();
 app.use(express.json());
 app.use("/api", routes);
 
-app.listen(8888);
+app.listen(8888, (request, response)=> {
+    console.log("Serviço iniciado na porta 8888");
+});
