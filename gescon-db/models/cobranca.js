@@ -13,6 +13,15 @@ module.exports = sequelize => {
       comment: null,
       field: "idcobranca"
     },
+    descricao: {
+      type: DataTypes.STRING(45),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "descricao"
+    },
     valor: {
       type: DataTypes.DECIMAL,
       allowNull: true,
