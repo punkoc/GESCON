@@ -12,5 +12,7 @@ router.delete("/servico/:id", servicoController.deleteById);
 
 router.post("/administradora", administradoraController.create);
 router.get("/administradora", administradoraController.getAll);
+router.delete("/administradora/:id", administradoraController.deleteById);
+router.put("/administradora/:id", administradoraController.alterById);
 
 module.exports = router;
