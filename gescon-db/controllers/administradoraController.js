@@ -108,8 +108,7 @@ const alterById = (request, response) => {
                 })
             });            
         }
-        response
-                .status(200)
+        response.status(200)
                 .send("Administradora de id = " + request.params.id + " Atualizado!")
     }).catch((error) => {
         console.error(error);
