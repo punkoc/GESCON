@@ -28,6 +28,6 @@ module.exports = sequelize => {
     comment: "",
     indexes: []
   };
-  const ServicoModel = sequelize.define("servicoModel", attributes, options);
+  const ServicoModel = sequelize.define("servico", attributes, options);
   return ServicoModel;
 };

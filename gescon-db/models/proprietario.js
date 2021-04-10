@@ -64,6 +64,6 @@ module.exports = sequelize => {
       fields: ["idendereco"]
     }]
   };
-  const ProprietarioModel = sequelize.define("proprietarioModel", attributes, options);
+  const ProprietarioModel = sequelize.define("proprietario", attributes, options);
   return ProprietarioModel;
 };

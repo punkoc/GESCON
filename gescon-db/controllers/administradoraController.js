@@ -1,10 +1,9 @@
-const { sequelize } = require("../models");
 const model = require("../models");
 
-const Administradora = model.administradoraModel;
+const Administradora = model.administradora;
 const Endereco = model.endereco;
 
-Administradora.hasOne(Endereco, { foreignKey: "idendereco" });
+Administradora.belongsTo(Endereco, { foreignKey: "idendereco" });
 
 const create = (request, response) => {
     const end = {

@@ -55,6 +55,6 @@ module.exports = sequelize => {
       fields: ["idunidade"]
     }]
   };
-  const CobrancaModel = sequelize.define("cobrancaModel", attributes, options);
+  const CobrancaModel = sequelize.define("cobranca", attributes, options);
   return CobrancaModel;
 };

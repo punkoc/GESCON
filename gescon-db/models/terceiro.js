@@ -82,6 +82,6 @@ module.exports = sequelize => {
       fields: ["idservico"]
     }]
   };
-  const TerceiroModel = sequelize.define("terceiroModel", attributes, options);
+  const TerceiroModel = sequelize.define("terceiro", attributes, options);
   return TerceiroModel;
 };

@@ -55,6 +55,6 @@ module.exports = sequelize => {
       fields: ["idendereco"]
     }]
   };
-  const AdministradoraModel = sequelize.define("administradoraModel", attributes, options);
+  const AdministradoraModel = sequelize.define("administradora", attributes, options);
   return AdministradoraModel;
 };

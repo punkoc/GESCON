@@ -41,17 +41,17 @@ module.exports = sequelize => {
       field: "idendereco",
       references: {
         key: "idendereco",
-        model: "enderecoModel"
+        model: "endereco"
       }
     },
-    idadministrador: {
+    idadministradora: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
-      field: "idadministrador",
+      field: "idadministradora",
       references: {
         key: "idadministradora",
         model: "administradoraModel"
@@ -70,9 +70,9 @@ module.exports = sequelize => {
       name: "fk_idadministradora_idx",
       unique: false,
       type: "BTREE",
-      fields: ["idadministrador"]
+      fields: ["idadministradora"]
     }]
   };
-  const CondominioModel = sequelize.define("condominioModel", attributes, options);
+  const CondominioModel = sequelize.define("condominio", attributes, options);
   return CondominioModel;
 };

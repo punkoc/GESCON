@@ -64,6 +64,6 @@ module.exports = sequelize => {
       fields: ["idcondominio"]
     }]
   };
-  const UnidadeModel = sequelize.define("unidadeModel", attributes, options);
+  const UnidadeModel = sequelize.define("unidade", attributes, options);
   return UnidadeModel;
 };
