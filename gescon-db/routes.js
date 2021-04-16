@@ -6,6 +6,9 @@ const administradoraController = require('./controllers/administradoraController
 const condominioController = require('./controllers/condominioController');
 const proprietarioController = require('./controllers/proprietarioController');
 const unidadeController = require('./controllers/unidadeController');
+const terceiroController = require('./controllers/terceiroController');
+const cobrancaController = require('./controllers/cobrancaController');
+const loginController = require('./controllers/loginController');
 
 router.post("/servico", servicoController.create);
 router.get("/servico", servicoController.getAll);
@@ -36,5 +39,23 @@ router.get("/unidade", unidadeController.getAll);
 router.delete("/unidade/:id", unidadeController.deleteById);
 router.put("/unidade/:id", unidadeController.alterById);
 router.get("/unidade/:id", unidadeController.getById);
+
+router.post("/terceiro", terceiroController.create);
+router.get("/terceiro", terceiroController.getAll);
+router.delete("/terceiro/:id", terceiroController.deleteById);
+router.put("/terceiro/:id", terceiroController.alterById);
+router.get("/terceiro/:id", terceiroController.getById);
+
+router.post("/cobranca", cobrancaController.create);
+router.get("/cobranca", cobrancaController.getAll);
+router.delete("/cobranca/:id", cobrancaController.deleteById);
+router.put("/cobranca/:id", cobrancaController.alterById);
+router.get("/cobranca/:id", cobrancaController.getById);
+
+router.post("/login", loginController.create);
+router.get("/login", loginController.getAll);
+router.delete("/login/:id", loginController.deleteById);
+router.put("/login/:id", loginController.alterById);
+router.get("/login/:id", loginController.getById);
 
 module.exports = router;

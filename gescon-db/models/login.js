@@ -37,6 +37,6 @@ module.exports = sequelize => {
     comment: "",
     indexes: []
   };
-  const LoginModel = sequelize.define("loginModel", attributes, options);
+  const LoginModel = sequelize.define("login", attributes, options);
   return LoginModel;
 };
