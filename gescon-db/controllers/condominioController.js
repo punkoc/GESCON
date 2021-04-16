@@ -70,6 +70,41 @@ const getAll = (request, response) => {
         }).catch((error) => { response.status(400).send(error) });
 };
 
+const getById = (request, response) => {
+    Condominio.findByPk(request.params.id,
+        {
+            include: [
+                {
+                    model: Endereco,
+                    required: true,
+                    attributes: [
+                        "logradouro",
+                        "bairro",
+                        "cidade",
+                        "numero",
+                        "cep",
+                        "uf"
+                    ],
+                },
+                {
+                    model: Administradora,
+                    require: true,
+                    attributes: [
+                        "nome",
+                        "cnpj"
+                    ]
+                }
+            ]
+        })
+        .then((object) => {
+            response.status(200).send(object.dataValues);
+        })
+        .catch((error) => {
+            console.error(error);
+            response.status(400).send(error);
+        });
+};
+
 const deleteById = (request, response) => {
     Condominio.destroy({
         where: { idcondominio: request.params.id },
@@ -132,6 +167,7 @@ const alterById = (request, response) => {
 
 module.exports = {
     create,
+    getById,
     getAll,
     deleteById,
     alterById,

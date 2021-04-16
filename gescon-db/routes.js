@@ -4,6 +4,8 @@ const router = express.Router();
 const servicoController = require('./controllers/servicoController');
 const administradoraController = require('./controllers/administradoraController');
 const condominioController = require('./controllers/condominioController');
+const proprietarioController = require('./controllers/proprietarioController');
+const unidadeController = require('./controllers/unidadeController');
 
 router.post("/servico", servicoController.create);
 router.get("/servico", servicoController.getAll);
@@ -15,10 +17,24 @@ router.post("/administradora", administradoraController.create);
 router.get("/administradora", administradoraController.getAll);
 router.delete("/administradora/:id", administradoraController.deleteById);
 router.put("/administradora/:id", administradoraController.alterById);
+router.get("/administradora/:id", administradoraController.getById);
 
 router.post("/condominio", condominioController.create);
 router.get("/condominio", condominioController.getAll);
 router.delete("/condominio/:id", condominioController.deleteById);
 router.put("/condominio/:id", condominioController.alterById);
+router.get("/condominio/:id", condominioController.getById);
+
+router.post("/proprietario", proprietarioController.create);
+router.get("/proprietario", proprietarioController.getAll);
+router.delete("/proprietario/:id", proprietarioController.deleteById);
+router.put("/proprietario/:id", proprietarioController.alterById);
+router.get("/proprietario/:id", proprietarioController.getById);
+
+router.post("/unidade", unidadeController.create);
+router.get("/unidade", unidadeController.getAll);
+router.delete("/unidade/:id", unidadeController.deleteById);
+router.put("/unidade/:id", unidadeController.alterById);
+router.get("/unidade/:id", unidadeController.getById);
 
 module.exports = router;

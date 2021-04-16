@@ -1,9 +1,9 @@
 const model = require("../models");
 
-const Administradora = model.administradora;
+const Proprietario = model.proprietario;
 const Endereco = model.endereco;
 
-Administradora.belongsTo(Endereco, { foreignKey: "idendereco" });
+Proprietario.belongsTo(Endereco, { foreignKey: "idendereco" });
 
 const create = (request, response) => {
     const end = {
@@ -16,13 +16,14 @@ const create = (request, response) => {
     };
 
     Endereco.create(end).then((result) => {
-        const adm = {
+        const prop = {
             nome: request.body.nome,
-            cnpj: request.body.cnpj,
+            telefone: request.body.telefone,
+            cpf: request.body.cpf,
             idendereco: result.idendereco
         };
-        console.log(adm);
-        Administradora.create(adm)
+        console.log(prop);
+        Proprietario.create(prop)
             .then((result) => {
                 response.send(result.dataValues);
             }).catch((error) => { response.status(400).send(error) });
@@ -30,18 +31,7 @@ const create = (request, response) => {
 };
 
 const getById = (request, response) => {
-    Administradora.findByPk(request.params.id)
-        .then((object) => {
-            response.status(200).send(object.dataValues);
-        })
-        .catch((error) => {
-            console.error(error);
-            response.status(400).send(error);
-        });
-};
-
-const getAll = (request, response) => {
-    Administradora.findAll({
+    Proprietario.findByPk(request.params.id,{
         include: [
             {
                 model: Endereco,
@@ -56,9 +46,41 @@ const getAll = (request, response) => {
             },
         ],
         attributes: [
-            "idadministradora",
+            "idproprietario",
             "nome",
-            "cnpj",
+            "telefone",
+            "cpf",
+        ],
+    })
+        .then((object) => {
+            response.status(200).send(object.dataValues);
+        })
+        .catch((error) => {
+            console.error(error);
+            response.status(400).send(error);
+        });
+};
+
+const getAll = (request, response) => {
+    Proprietario.findAll({
+        include: [
+            {
+                model: Endereco,
+                required: true,
+                attributes: [
+                    "logradouro",
+                    "bairro",
+                    "cidade",
+                    "numero",
+                    "cep",
+                    "uf",],
+            },
+        ],
+        attributes: [
+            "idproprietario",
+            "nome",
+            "telefone",
+            "cpf",
         ],
     })
         .then((object) => {
@@ -68,19 +90,19 @@ const getAll = (request, response) => {
 };
 
 const deleteById = (request, response) => {
-    Administradora.destroy({
-        where: { idadministradora: request.params.id },
+    Proprietario.destroy({
+        where: { idproprietario: request.params.id },
     })
         .then((object) => {
             if (object === 0) {
                 response
                     .status(200)
-                    .send("Nenhuma Administradora foi encontrada para deletar!");
+                    .send("Nenhum proprietario foi encontrado para deletar!");
             } else {
                 response
                     .status(200)
                     .send(
-                        "Administradora com id = " + request.params.id + " deletado!"
+                        "Proprietario com id = " + request.params.id + " deletado!"
                     );
             }
         })
@@ -91,14 +113,15 @@ const deleteById = (request, response) => {
 };
 
 const alterById = (request, response) => {
-    const adm = {
+    const prop = {
         nome: request.body.nome,
-        cnpj: request.body.cnpj,
+        telefone: request.body.telefone,
+        cpf: request.body.cpf
     };
 
-    Administradora.update(adm, {
+    Proprietario.update(prop, {
         raw: true,
-        where: { idadministradora: request.params.id },
+        where: { idproprietario: request.params.id },
     }).then((object) => {
         if (request.body.endereco != null) {
             const end = {
@@ -110,7 +133,7 @@ const alterById = (request, response) => {
                 uf: request.body.endereco.uf
             };
             console.log(end);
-            Administradora.findByPk(request.params.id).then((result) => {
+            Proprietario.findByPk(request.params.id).then((result) => {
             console.log(result.dataValues);
             Endereco.update(end, {
                     raw: true,
@@ -119,7 +142,7 @@ const alterById = (request, response) => {
             });            
         }
         response.status(200)
-                .send("Administradora de id = " + request.params.id + " Atualizado!")
+                .send("Proprietario de id = " + request.params.id + " Atualizado!")
     }).catch((error) => {
         console.error(error);
         response.status(400).send(error);

@@ -1,6 +1,6 @@
 const model = require("../models");
 
-const Servico = model.servicoModel;
+const Servico = model.servico;
 
 const create = (request, response) => {
     Servico.create(request.body)
