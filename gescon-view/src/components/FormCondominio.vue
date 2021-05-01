@@ -5,7 +5,7 @@
         <b-form-group id="input-group-1">
           <b-form-input
             id="input-nome"
-            v-model="formAdm.nome"
+            v-model="formCondominio.nome"
             placeholder="Nome"
             required
           ></b-form-input>
@@ -15,8 +15,8 @@
         <b-form-group id="input-group-2">
           <b-form-input
             id="input-cnpj"
-            v-model="formAdm.cnpj"
-            placeholder="CNPJ"
+            v-model="formCondominio.telefone"
+            placeholder="Telefone"
             required
           ></b-form-input>
         </b-form-group>
@@ -28,16 +28,16 @@
 export default {
   data() {
     return {
-      formAdm: {
+      formCondominio: {
         nome: "",
-        cnpj: "",
+        telefone: "",
       },
     };
   },
   watch: {
-    formAdm: {
+    formCondominio: {
       handler(){
-        this.$emit("GetAdm", this.formAdm)
+        this.$emit("handlerCondominio", this.formCondominio)
       },
       deep: true
     }

@@ -106,5 +106,20 @@ export default {
       ],
     };
   },
+  watch: {
+    formEnd: {
+      handler(){
+        this.$emit("GetEnd", 
+        [this.formEnd.logradouro, 
+        this.formEnd.bairro, 
+        this.formEnd.cidade, 
+        this.formEnd.numero,
+        this.formEnd.cep,
+        this.formEnd.uf
+        ])
+      },
+      deep: true
+    }
+  }
 };
 </script>
