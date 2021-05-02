@@ -4,8 +4,10 @@
     <b-sidebar id="gescon-menu" title="Menu" shadow>
       <b-nav-item href="/">Home</b-nav-item>
       <b-nav-item href="/administradora">Administradora</b-nav-item>
-      <b-nav-item href="/condominio">Condomínio</b-nav-item>
+      <b-nav-item href="/condominio">Condomínios</b-nav-item>
       <b-nav-item href="/servico">Serviços</b-nav-item>
+      <b-nav-item href="/proprietario">Proprietários</b-nav-item>
+      <b-nav-item href="/unidade">Unidades</b-nav-item>
     </b-sidebar>
   </div>
 </template>

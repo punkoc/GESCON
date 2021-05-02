@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>
-      Condomínios
+      Proprietários
       <b-icon
         @click="criar()"
         icon="folder-plus"
@@ -11,27 +11,27 @@
     </h1>
 
     <div class="table">
-      <b-table striped hover :items="condominios" :fields="fields">
+      <b-table striped hover :items="proprietarios" :fields="fields">
         <template v-slot:cell(editar)="modelEdit">
           <b-button @click="editar(modelEdit.item)">Editar</b-button>
         </template>
       </b-table>
     </div>
-    
+
     <b-modal
       :id="modalData.id"
       size="xl"
-      title="Cadastro Condominio"
+      title="Cadastro Proprietário"
       @ok="onSubmit"
       @hide="resetarModal()"
       ok-title="Salvar"
     >
       <b-form>
-        <form-condominio
+        <form-proprietario
           v-on:handler="atualizar"
           :editar="modalData.model"
           :callback="modalData.callback"
-        ></form-condominio>
+        ></form-proprietario>
         <form-endereco
           v-on:handler="atualizarEnd"
           :editar="modalData.endereco"
@@ -40,19 +40,18 @@
     </b-modal>
   </div>
 </template>
-
 <script>
-import FormCondominio from "../components/FormCondominio.vue";
+import FormProprietario from "../components/FormProprietario.vue";
 import FormEndereco from "../components/FormEndereco.vue";
 
 export default {
-  name: "Condominio",
-  components: { FormCondominio, FormEndereco },
+  name: "Proprietario",
+  components: { FormProprietario, FormEndereco },
   mounted() {
     this.$http
-      .get("/condominio")
+      .get("/proprietario")
       .then((result) => {
-        this.condominios = result.data;
+        this.proprietarios = result.data;
       })
       .catch((error) => {
         console.log(error);
@@ -60,10 +59,11 @@ export default {
   },
   data() {
     return {
-      formCondominio: {
-        idcondominio: 0,
+      formProprietario: {
+        idproprietario: 0,
         nome: "",
         telefone: "",
+        cpf: "",
         endereco: {
           logradouro: "",
           bairro: "",
@@ -73,8 +73,8 @@ export default {
           uf: null,
         },
       },
-      condominios: [],
-      fields: ["idcondominio", "nome", "telefone", "editar"],
+      proprietarios: [],
+      fields: ["idproprietario", "nome", "telefone", "cpf", "editar"],
       modalData: {
         id: "modalEdit",
         model: null,
@@ -84,11 +84,11 @@ export default {
     };
   },
   methods: {
-     carregarDados() {
+    carregarDados() {
       this.$http
-        .get("/condominio")
+        .get("/proprietario")
         .then((result) => {
-          this.condominios = result.data;
+          this.proprietarios = result.data;
         })
         .catch((error) => {
           console.log(error);
@@ -98,7 +98,7 @@ export default {
     criar() {
       this.modalData.callback = (dados) => {
         this.$http
-          .post("/condominio", dados)
+          .post("/proprietario", dados)
           .then(() => {
             this.carregarDados();
           })
@@ -115,7 +115,7 @@ export default {
 
       this.modalData.callback = (dados) => {
         this.$http
-          .put("/condominio/" + dados.idcondominio, dados)
+          .put("/proprietario/" + dados.idproprietario, dados)
           .then(() => {
             this.carregarDados();
           })
@@ -132,29 +132,28 @@ export default {
     },
 
     onSubmit() {
-      this.modalData.callback(this.formCondominio);
+      this.modalData.callback(this.formProprietario);
     },
 
     atualizar(evento) {
-      this.formCondominio.idcondominio = evento.idcondominio;
-      this.formCondominio.nome = evento.nome;
-      this.formCondominio.telefone = evento.telefone;
+      this.formProprietario.idproprietario = evento.idproprietario;
+      this.formProprietario.nome = evento.nome;
+      this.formProprietario.telefone = evento.telefone;
+      this.formProprietario.cpf = evento.cpf;
     },
-
     atualizarEnd(evento) {
-      this.formCondominio.endereco.logradouro = evento[0];
-      this.formCondominio.endereco.bairro = evento[1];
-      this.formCondominio.endereco.cidade = evento[2];
-      this.formCondominio.endereco.numero = evento[3];
-      this.formCondominio.endereco.cep = evento[4];
-      this.formCondominio.endereco.uf = evento[5];
-    },   
+      this.formProprietario.endereco.logradouro = evento[0];
+      this.formProprietario.endereco.bairro = evento[1];
+      this.formProprietario.endereco.cidade = evento[2];
+      this.formProprietario.endereco.numero = evento[3];
+      this.formProprietario.endereco.cep = evento[4];
+      this.formProprietario.endereco.uf = evento[5];
+    },
   },
 };
 </script>
-
 <style>
-div.row {
+.row {
   margin: 5px;
 }
 div.table {

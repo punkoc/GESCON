@@ -64,13 +64,23 @@
 
 <script>
 export default {
+  props:{
+    editar: {
+        logradouro: String,
+        bairro: String,
+        cidade: String,
+        numero: String,
+        cep: String,
+        uf: null,
+      },
+  },
   data() {
     return {
       formEnd: {
         logradouro: "",
         bairro: "",
         cidade: "",
-        numero: 0,
+        numero: null,
         cep: "",
         uf: null,
       },
@@ -106,10 +116,20 @@ export default {
       ],
     };
   },
+  mounted(){
+    if(this.editar){
+      this.formEnd.logradouro = this.editar.logradouro;
+      this.formEnd.bairro = this.editar.bairro;
+      this.formEnd.cidade = this.editar.cidade;
+      this.formEnd.numero = this.editar.numero;
+      this.formEnd.cep = this.editar.cep;
+      this.formEnd.uf = this.editar.uf;
+    }
+  },
   watch: {
     formEnd: {
       handler(){
-        this.$emit("GetEnd", 
+        this.$emit("handler", 
         [this.formEnd.logradouro, 
         this.formEnd.bairro, 
         this.formEnd.cidade, 

@@ -28,6 +28,7 @@ const getAll = (request, response) => {
                 model: Proprietario,
                 required: true,
                 attributes: [
+                    "idproprietario",
                     "nome",
                     "cpf",
                     "telefone",
@@ -37,6 +38,7 @@ const getAll = (request, response) => {
                 model: Condominio,
                 require: true,
                 attributes: [
+                    "idcondominio",
                     "nome",
                     "telefone"
                 ]

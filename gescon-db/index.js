@@ -3,8 +3,10 @@ const http = require('http');
 const routes = require('./routes');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger/swagger_output.json')
+const cors = require("cors")
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 app.use("/api", routes);
 
